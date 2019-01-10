@@ -515,15 +515,53 @@ public class DateChooseWheelViewDialog extends Dialog implements View.OnClickLis
      */
     private String strTimeToDateFormat(String yearStr, String dateStr, String hourStr, String minuteStr) {
 
-        return yearStr.replace("年", "-") + dateStr.replace("月", "-").replace("日", " ")
-                + hourStr + ":" + minuteStr;
+        String hourString = "";
+        if (hourStr!= null && hourStr.length() == 1){
+            hourString = "0"+hourStr;
+        }else {
+            hourString = hourStr;
+        }
+        String minuteString = "";
+        if (minuteStr!= null && minuteStr.length() == 1){
+            minuteString = "0"+minuteStr;
+        }else {
+            minuteString = minuteStr;
+        }
+
+        String[] strings = dateStr.split("月");
+        String month = strings[0];
+        String dayS = strings[1];
+        String day = dayS.substring(0,dayS.length()-1);
+
+        if (month!= null && month.length()<=1){
+            month = "0"+month;
+        }
+        if (day!= null && day.length()<=1){
+            day = "0"+day;
+        }
+
+
+
+
+        return yearStr.replace("年", "-") + /*dateStr.replace("月", "-").replace("日", " ")*/
+                month+"-"+day+"   "  + hourString + ":" + minuteString;
     }
 
     private String strTimeToDateFormat(String yearStr, String dateStr) {
+        String[] strings = dateStr.split("月");
+        String month = strings[0];
+        String dayS = strings[1];
+        String day = dayS.substring(0,dayS.length()-1);
 
-        return yearStr.replace("年", "-") + dateStr.replace("月", "-").replace("日", "");
+        if (month!= null && month.length()<=1){
+            month = "0"+month;
+        }
+        if (day!= null && day.length()<=1){
+            day = "0"+day;
+        }
+        return yearStr.replace("年", "-") +  /*dateStr.replace("月", "-").replace("日", " ")*/
+                month+"-"+day;
     }
-
     /**
      * 滚轮的adapter
      */
